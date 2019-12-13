@@ -11,11 +11,35 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.StandardRoot;
+import org.junit.Test;
 
 /**
  * 임베디드 톰캣 예제
  */
 public class TomcatStart {
+
+	@Test
+	public void tomcatRun() throws IOException, ServletException, LifecycleException {
+		Tomcat tomcat = new Tomcat();
+		tomcat.setPort(8080);
+		Connector connector = tomcat.getConnector();
+		// 인코딩을 UTF-8로 설정
+		connector.setURIEncoding("UTF-8");
+		File addtionWebClasses = new File("target/classes");
+
+		// Context Tomcat.addWebapp(String contextPath, String docBase) throws
+		// ServletException
+		StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File("src/main/webapp/").getAbsolutePath());
+		// StandardContext ctx = (StandardContext)tomcat.addWebapp("", new
+		// File("src/main/webapp/").getAbsolutePath());
+		WebResourceRoot resources = new StandardRoot(ctx);
+		ctx.setResources(resources);
+
+		tomcat.start();
+		System.out.println("tomcat start");
+		tomcat.getServer().await();
+		// tomcat.getServer().stop();
+	}
 
 	public static void main(String args[]) throws IOException, ServletException, LifecycleException {
 		Tomcat tomcat = new Tomcat();
@@ -25,9 +49,11 @@ public class TomcatStart {
 		connector.setURIEncoding("UTF-8");
 		File addtionWebClasses = new File("target/classes");
 
-		// Context Tomcat.addWebapp(String contextPath, String docBase) throws ServletException
+		// Context Tomcat.addWebapp(String contextPath, String docBase) throws
+		// ServletException
 		StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File("src/main/webapp/").getAbsolutePath());
-		// StandardContext ctx = (StandardContext)tomcat.addWebapp("", new File("src/main/webapp/").getAbsolutePath());
+		// StandardContext ctx = (StandardContext)tomcat.addWebapp("", new
+		// File("src/main/webapp/").getAbsolutePath());
 		WebResourceRoot resources = new StandardRoot(ctx);
 		ctx.setResources(resources);
 

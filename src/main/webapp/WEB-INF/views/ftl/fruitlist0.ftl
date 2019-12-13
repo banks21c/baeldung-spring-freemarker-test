@@ -15,8 +15,7 @@
     <td>
 
         <pre>
-        <xmp>
-          <#include "/fruitlist1.ftl" parse=false>
+        <xmp> <#include "/fruitlist1.ftl" parse=false>
         </xmp>
         </pre>
 

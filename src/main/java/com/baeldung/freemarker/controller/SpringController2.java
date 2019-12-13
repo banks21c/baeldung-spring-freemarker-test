@@ -1,16 +1,18 @@
 package com.baeldung.freemarker.controller;
 
-import com.baeldung.freemarker.model.Animal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.baeldung.freemarker.model.Animal;
 import com.baeldung.freemarker.model.Misc;
-import org.springframework.ui.Model;
 
 @Controller
 public class SpringController2 {
@@ -32,7 +34,7 @@ public class SpringController2 {
 //        model.addAttribute("fruits", misc.getFruits());
         return "fruitlist0_1";
     }
-    
+
     @RequestMapping(value = "/fruitlist1", method = RequestMethod.GET)
     public String fruitlist1(@ModelAttribute("model") ModelMap model) {
         Misc misc = new Misc();
@@ -47,7 +49,7 @@ public class SpringController2 {
         model.addAttribute("misc", misc);
         return "fruitlist1_1";
     }
-    
+
     @RequestMapping(value = "/fruitlist2", method = RequestMethod.GET)
     public String fruitlist2(@ModelAttribute("model") ModelMap model) {
         Misc misc = new Misc();
@@ -55,7 +57,7 @@ public class SpringController2 {
         model.addAttribute("misc.fruits", misc.getFruits());
         return "fruitlist2";
     }
-    
+
     @RequestMapping(value = "/fruitlist2_2", method = RequestMethod.GET)
     public String fruitlist2_2(Model model) {
         Misc misc = new Misc();
@@ -108,7 +110,7 @@ public class SpringController2 {
         model.addAttribute("misc", misc);
         return "fruitlist5_1";
     }
-    
+
     @RequestMapping(value = "/copyright_include", method = RequestMethod.GET)
     public String copyright_include(@ModelAttribute("model") ModelMap model) {
         return "copyright_include";
@@ -136,6 +138,7 @@ public class SpringController2 {
 
         animalList.add(cheetah);
 
+        System.out.println("animalList:"+animalList);
         model.addAttribute("animals", animalList);
         return "animallist";
     }
